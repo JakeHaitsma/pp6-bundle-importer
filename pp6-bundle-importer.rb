@@ -8,9 +8,9 @@ propresenter_location = "/Applications/ProPresenter\ 6.app" # opens if no associ
 server_mount_timeout = 60 # timeout after 1min
 
 server_attempts = 0
-while (!Dir.exist?(src_folder_location)) # while the source folder doesnt exist (eg. server hasnt been mounted)
+while (!File.directory?(src_folder_location)) # while the source folder doesnt exist (eg. server hasnt been mounted)
     puts "Waiting for source folder to be mounted..."
-    server_attempts++
+    server_attempts += 1
     if server_attempts >= server_mount_timeout # if we have reached our timeout
         abort("Could not find source folder. Quitting...") # quit
     end
