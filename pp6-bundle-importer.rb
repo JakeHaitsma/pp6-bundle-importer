@@ -12,6 +12,7 @@ while (!File.directory?(src_folder_location)) # while the source folder doesnt e
     puts "Waiting for source folder to be mounted..."
     server_attempts += 1
     if server_attempts >= server_mount_timeout # if we have reached our timeout
+        system %{osascript -e 'tell application (path to frontmost application as text) to display dialog "Could not access JONAH. Mount the server and import new presentations manually." buttons {"OK"} with icon stop'}
         abort("Could not find source folder. Quitting...") # quit
     end
     sleep 1 # wait 1sec before trying again
@@ -29,7 +30,7 @@ if File.exist?(manifest_location) # if the manifest already exists
 else
     puts "No manifest found... creating an empty one"
     file = File.open(manifest_location,"w") # create empty manifest file (~/.basecamp)
-    file.close
+    file.clos
 end
 
 puts "Parsing manifest..."
